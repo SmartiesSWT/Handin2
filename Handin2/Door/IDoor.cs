@@ -10,7 +10,7 @@ namespace Handin2
     public class DoorEventArgs : EventArgs
     {
         // Open = true, closed = false
-        public bool DoorState { set; get; }
+        public bool IsDoorOpen { set; get; }
     }
     public interface IDoor
     {

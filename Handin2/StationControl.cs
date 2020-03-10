@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Handin2;
+using Handin2.RfidReader;
 using UsbSimulator;
 
 namespace Ladeskab
@@ -21,6 +22,7 @@ namespace Ladeskab
 
         // Her mangler flere member variable
         private LadeskabState _state;
+        private IRfidReader _rfidReader;
         private IUsbCharger _charger;
         private IDoor _door;
         private IDisplay _display;
@@ -29,11 +31,12 @@ namespace Ladeskab
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
         // Her mangler constructor
-        public StationControl(IDoor door, IUsbCharger charger, IDisplay display)
+        public StationControl(IDoor door, IUsbCharger charger, IDisplay display, IRfidReader rfidReader)
         {
             _charger = charger;
             _display = display;
             _door = door;
+            _rfidReader = rfidReader;
 
             door.DoorEvent += DoorOpened;
         }
@@ -95,13 +98,11 @@ namespace Ladeskab
         // Her mangler de andre trigger handlere
 
 
-
-
         private void DoorOpened(object sender, DoorEventArgs e)
         {
             
             Console.WriteLine("Tilslut din telefon til ladestikket");
-            e.DoorState = true;
+            e.IsDoorOpen = true;
             _state = LadeskabState.DoorOpen;
         }
 
@@ -109,7 +110,7 @@ namespace Ladeskab
         {
             
             Console.WriteLine("Indlæs Rfid Id");
-            e.DoorState = false;
+            e.IsDoorOpen = false;
             _state = LadeskabState.Available;
         }
     }
