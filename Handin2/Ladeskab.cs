@@ -26,7 +26,7 @@ namespace Handin2
             do
             {
                 string input;
-                System.Console.WriteLine("Indtast E (Exit), O (Open), C (Close), R (Rfid id): ");
+                System.Console.WriteLine("Indtast E (Exit), O (Open), C (Close), R (Rfid id), T (Tag telefon), P (Tilslut telefon): ");
                 input = Console.ReadLine();
                 if (string.IsNullOrEmpty(input)) continue;
 
@@ -46,11 +46,6 @@ namespace Handin2
                         {
                             door.OnDoorOpen();
                         }
-                       
-                        
-                        Console.WriteLine("Tryk på en tilfældig knap for at simulere at telefonen er tilsluttet.");
-                        Console.ReadLine();
-                        charger.SimulateConnected(true);
                         break;
 
                     case 'C':
@@ -65,6 +60,15 @@ namespace Handin2
                         rfidReader.OnRfidRead(id);
                         break;
 
+                    case 'T':
+                        charger.SimulateConnected(false);
+                        display.print("Du har taget din telefon");
+                        
+                        break;
+
+                    case 'P':
+                        charger.SimulateConnected(true);
+                        break;
                     default:
                         break;
                 }

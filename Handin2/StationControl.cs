@@ -38,6 +38,8 @@ namespace Ladeskab
             _door = door;
             _rfidReader = rfidReader;
 
+           
+
             _door.DoorEvent += DoorEvent;
             _rfidReader.RfidEvent += RfidEvent;
 
@@ -121,12 +123,20 @@ namespace Ladeskab
 
         private void DoorClosed(DoorEventArgs e)
         {
-            Console.WriteLine("Indlæs RFID.");
-            var input = Console.ReadLine();
-            e.IsDoorOpen = false;
-            _state = LadeskabState.Available;
-            int intinput = Int16.Parse(input);
-            RfidDetected(intinput);
+            if (_charger.Connected)
+            {
+                Console.WriteLine("Indlæs RFID.");
+                var input = Console.ReadLine();
+                e.IsDoorOpen = false;
+                _state = LadeskabState.Available;
+                int intinput = Int16.Parse(input);
+                RfidDetected(intinput);
+            }
+            else
+            {
+                Console.WriteLine("Ingen telefon connected");
+            }
+            
         }
 
         private void RfidEvent(Object sender, RfidEventArgs e)

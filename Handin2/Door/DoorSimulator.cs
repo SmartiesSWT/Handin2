@@ -43,7 +43,7 @@ namespace Handin2
         {
             Open = false;
             DoorEvent?.Invoke(this,new DoorEventArgs(){IsDoorOpen = this.Open});
-            Console.WriteLine("Døren er låst.");
+            
         }
     }
 }

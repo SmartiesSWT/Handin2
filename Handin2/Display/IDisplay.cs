@@ -8,6 +8,6 @@ namespace Handin2
 {
     public interface IDisplay
     {
-        void print();
+        void print(string skrift);
     }
 }

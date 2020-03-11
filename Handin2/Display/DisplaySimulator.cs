@@ -8,9 +8,9 @@ namespace Handin2.Display
 {
     public class DisplaySimulator : IDisplay
     {
-        public void print()
+        public void print(string tekst)
         {
-            
+            Console.WriteLine(tekst);
         }
     }
 }

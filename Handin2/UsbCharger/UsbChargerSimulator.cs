@@ -26,7 +26,7 @@ namespace UsbSimulator
         public UsbChargerSimulator()
         {
             CurrentValue = 0.0;
-            Connected = true;
+            Connected = false;
             _overload = false;
 
             _timer = new System.Timers.Timer();
@@ -63,7 +63,15 @@ namespace UsbSimulator
         public void SimulateConnected(bool connected)
         {
             Connected = connected;
-            Console.WriteLine("Telefon er tilsluttet.");
+            if (Connected)
+            {
+                Console.WriteLine("Telefon er tilsluttet.");
+            }
+            else
+            {
+                Console.WriteLine("Telefon er ikke tilsluttet.");
+            }
+            
         }
 
         public void SimulateOverload(bool overload)
