@@ -26,7 +26,7 @@ namespace Handin2
             do
             {
                 string input;
-                System.Console.WriteLine("Indtast E, O, C, R: ");
+                System.Console.WriteLine("Indtast E (Exit), O (Open), C (Close), R (Rfid id): ");
                 input = Console.ReadLine();
                 if (string.IsNullOrEmpty(input)) continue;
 
@@ -39,7 +39,7 @@ namespace Handin2
                     case 'O':
                         if (door.Islocked)
                         {
-                            Console.WriteLine("Door is locked. Scan your rfid thingy");
+                            Console.WriteLine("Døren er låst. Skan din RFID.");
                             goto case 'R';
                         }
                         else
@@ -48,7 +48,7 @@ namespace Handin2
                         }
                        
                         
-                        Console.WriteLine("Press any button to simulate connecting phone");
+                        Console.WriteLine("Tryk på en tilfældig knap for at simulere at telefonen er tilsluttet.");
                         Console.ReadLine();
                         charger.SimulateConnected(true);
                         break;

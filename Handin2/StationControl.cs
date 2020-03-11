@@ -85,12 +85,12 @@ namespace Ladeskab
                             writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", id);
                         }
 
-                        Console.WriteLine("Tag din telefon ud af skabet og luk døren");
+                        Console.WriteLine("Tag din telefon ud af skabet og luk døren.");
                         _state = LadeskabState.Available;
                     }
                     else
                     {
-                        Console.WriteLine("Forkert RFID tag");
+                        Console.WriteLine("Forkert RFID tag.");
                     }
 
                     break;
@@ -114,14 +114,14 @@ namespace Ladeskab
         private void DoorOpened(DoorEventArgs e)
         {
             
-            Console.WriteLine("Tilslut din telefon til ladestikket");
+            Console.WriteLine("Tilslut din telefon til ladestikket.");
             e.IsDoorOpen = true;
             _state = LadeskabState.DoorOpen;
         }
 
         private void DoorClosed(DoorEventArgs e)
         {
-            Console.WriteLine("Indlæs Rfid Id");
+            Console.WriteLine("Indlæs RFID.");
             var input = Console.ReadLine();
             e.IsDoorOpen = false;
             _state = LadeskabState.Available;

@@ -31,11 +31,11 @@ namespace Handin2
         {
             if (Islocked)
             {
-                Console.WriteLine("Doeren er laast.");
+                Console.WriteLine("Døren er låst.");
                 return;
             }
             Open = true;
-            Console.WriteLine("Doeren er aaben.");
+            Console.WriteLine("Døren er åben.");
             DoorEvent?.Invoke(this, new DoorEventArgs() { IsDoorOpen = this.Open });
         }
 
@@ -43,7 +43,7 @@ namespace Handin2
         {
             Open = false;
             DoorEvent?.Invoke(this,new DoorEventArgs(){IsDoorOpen = this.Open});
-            Console.WriteLine("Doeren er laast.");
+            Console.WriteLine("Døren er låst.");
         }
     }
 }
