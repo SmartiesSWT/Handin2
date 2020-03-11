@@ -8,9 +8,7 @@ namespace Handin2
 {
     class DoorSimulator : IDoor
     {
-
         public event EventHandler<DoorEventArgs> DoorEvent;
-
         public bool Open { get; private set; }
         public bool Islocked { get; set; }
 
@@ -33,19 +31,19 @@ namespace Handin2
         {
             if (Islocked)
             {
-                Console.WriteLine("The door is locked");
+                Console.WriteLine("Doeren er laast.");
                 return;
             }
             Open = true;
-            Console.WriteLine("The Door is now open");
+            Console.WriteLine("Doeren er aaben.");
             DoorEvent?.Invoke(this, new DoorEventArgs() { IsDoorOpen = this.Open });
         }
 
         public void OnDoorClose()
         {
-            
             Open = false;
             DoorEvent?.Invoke(this,new DoorEventArgs(){IsDoorOpen = this.Open});
+            Console.WriteLine("Doeren er laast.");
         }
     }
 }

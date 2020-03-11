@@ -12,11 +12,8 @@ namespace Handin2.RfidReader
     }
     public interface IRfidReader
     {
-
         event EventHandler<RfidEventArgs> RfidEvent;
 
         void OnRfidRead(int id);
-        
-
     }
 }

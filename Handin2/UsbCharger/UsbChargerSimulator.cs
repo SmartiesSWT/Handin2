@@ -106,6 +106,7 @@ namespace UsbSimulator
             OnNewCurrent();
 
             _charging = false;
+            Console.WriteLine("Opladning stoppet.");
         }
 
         private void OnNewCurrent()

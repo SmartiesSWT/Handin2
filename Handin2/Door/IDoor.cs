@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Handin2
 {
-
     public class DoorEventArgs : EventArgs
     {
         // Open = true, closed = false

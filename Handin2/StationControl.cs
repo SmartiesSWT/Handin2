@@ -99,8 +99,6 @@ namespace Ladeskab
 
         // Her mangler de andre trigger handlere
 
-
-
         private void DoorEvent(Object sender, DoorEventArgs e)
         {
             if (e.IsDoorOpen == true)
