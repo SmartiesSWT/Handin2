@@ -38,7 +38,9 @@ namespace Ladeskab
             _door = door;
             _rfidReader = rfidReader;
 
-            door.DoorEvent += DoorOpened;
+            _door.DoorEvent += DoorEvent;
+            _rfidReader.RfidEvent += RfidEvent;
+
         }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
@@ -98,7 +100,20 @@ namespace Ladeskab
         // Her mangler de andre trigger handlere
 
 
-        private void DoorOpened(object sender, DoorEventArgs e)
+
+        private void DoorEvent(Object sender, DoorEventArgs e)
+        {
+            if (e.IsDoorOpen == true)
+            {
+                DoorOpened(e);
+            }
+            else
+            {
+                DoorClosed(e);
+            }
+        }
+
+        private void DoorOpened(DoorEventArgs e)
         {
             
             Console.WriteLine("Tilslut din telefon til ladestikket");
@@ -106,12 +121,20 @@ namespace Ladeskab
             _state = LadeskabState.DoorOpen;
         }
 
-        private void DoorClosed(object sender, DoorEventArgs e)
+        private void DoorClosed(DoorEventArgs e)
         {
-            
             Console.WriteLine("Indlæs Rfid Id");
+            var input = Console.ReadLine();
             e.IsDoorOpen = false;
             _state = LadeskabState.Available;
+            int intinput = Int16.Parse(input);
+            RfidDetected(intinput);
         }
+
+        private void RfidEvent(Object sender, RfidEventArgs e)
+        {
+           RfidDetected(e.RfidTag);
+        }
+
     }
 }

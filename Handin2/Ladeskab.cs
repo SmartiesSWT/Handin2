@@ -37,7 +37,17 @@ namespace Handin2
                         break;
 
                     case 'O':
-                        door.OnDoorOpen();
+                        if (door.Islocked)
+                        {
+                            Console.WriteLine("Door is locked. Scan your rfid thingy");
+                            goto case 'R';
+                        }
+                        else
+                        {
+                            door.OnDoorOpen();
+                        }
+                       
+                        
                         Console.WriteLine("Press any button to simulate connecting phone");
                         Console.ReadLine();
                         charger.SimulateConnected(true);

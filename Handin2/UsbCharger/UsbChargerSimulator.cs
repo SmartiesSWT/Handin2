@@ -63,6 +63,7 @@ namespace UsbSimulator
         public void SimulateConnected(bool connected)
         {
             Connected = connected;
+            Console.WriteLine("Telefon er tilsluttet.");
         }
 
         public void SimulateOverload(bool overload)
