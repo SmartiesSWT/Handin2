@@ -37,15 +37,9 @@ namespace Handin2
                         break;
 
                     case 'O':
-                        if (door.Islocked)
-                        {
-                            Console.WriteLine("Døren er låst. Skan din RFID.");
-                            goto case 'R';
-                        }
-                        else
-                        {
+                     
                             door.OnDoorOpen();
-                        }
+                        
                         break;
 
                     case 'C':
@@ -62,7 +56,7 @@ namespace Handin2
 
                     case 'T':
                         charger.SimulateConnected(false);
-                        display.print("Du har taget din telefon");
+                        //display.print("Du har taget din telefon");
                         
                         break;
 

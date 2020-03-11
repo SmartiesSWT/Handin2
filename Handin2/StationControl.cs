@@ -63,6 +63,7 @@ namespace Ladeskab
                         }
 
                         Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
+                        
                         _state = LadeskabState.Locked;
                     }
                     else
@@ -82,13 +83,16 @@ namespace Ladeskab
                     {
                         _charger.StopCharge();
                         _door.UnlockDoor();
+                        
                         using (var writer = File.AppendText(logFile))
                         {
                             writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", id);
                         }
 
-                        Console.WriteLine("Tag din telefon ud af skabet og luk døren.");
+                        Console.WriteLine("Åben lågen og tag din telefon.");
+                        
                         _state = LadeskabState.Available;
+
                     }
                     else
                     {
@@ -103,40 +107,51 @@ namespace Ladeskab
 
         private void DoorEvent(Object sender, DoorEventArgs e)
         {
-            if (e.IsDoorOpen == true)
+
+            switch (_state)
             {
-                DoorOpened(e);
+                case LadeskabState.Available:
+                    DoorOpened(e);
+                    break;
+                case LadeskabState.DoorOpen:
+                    DoorClosed(e);
+                    break;
+                case LadeskabState.Locked:
+                    _display.print("Hov hov, døren er låst du");
+                    break;
+                
             }
-            else
-            {
-                DoorClosed(e);
-            }
+
         }
 
         private void DoorOpened(DoorEventArgs e)
         {
             
-            Console.WriteLine("Tilslut din telefon til ladestikket.");
-            e.IsDoorOpen = true;
-            _state = LadeskabState.DoorOpen;
+            if (e.IsDoorOpen)
+            {
+                _display.print("Tilslut din telefon.");
+                _state = LadeskabState.DoorOpen;
+            }
+            else
+            {
+                e.IsDoorOpen = true;
+                _display.print("Tag din telefon");
+            }
+            
         }
 
         private void DoorClosed(DoorEventArgs e)
         {
-            if (_charger.Connected)
+            if (e.IsDoorOpen) 
             {
-                Console.WriteLine("Indlæs RFID.");
-                var input = Console.ReadLine();
-                e.IsDoorOpen = false;
+               _display.print("Der skete en fejl i lukning af døren.");
+            }
+           else 
+            {
+                
+                _display.print("Døren er lukket, men ikke låst: Indlaes RFID ved at trykke R os så indtast nummer");
                 _state = LadeskabState.Available;
-                int intinput = Int16.Parse(input);
-                RfidDetected(intinput);
             }
-            else
-            {
-                Console.WriteLine("Ingen telefon connected");
-            }
-            
         }
 
         private void RfidEvent(Object sender, RfidEventArgs e)

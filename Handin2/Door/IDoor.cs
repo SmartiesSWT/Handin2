@@ -14,6 +14,9 @@ namespace Handin2
     public interface IDoor
     {
         event EventHandler<DoorEventArgs> DoorEvent;
+
+        bool Islocked { get; set; }
+
         void LockDoor();
 
         void UnlockDoor(); 

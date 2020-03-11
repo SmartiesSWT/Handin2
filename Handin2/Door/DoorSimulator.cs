@@ -29,20 +29,33 @@ namespace Handin2
 
         public void OnDoorOpen()
         {
-            if (Islocked)
+            if (Open)
             {
-                Console.WriteLine("Døren er låst.");
-                return;
+                Console.WriteLine("Man kan ikke åbne en åben dør");
             }
-            Open = true;
-            Console.WriteLine("Døren er åben.");
-            DoorEvent?.Invoke(this, new DoorEventArgs() { IsDoorOpen = this.Open });
+            else
+            {
+                if (Islocked)
+                {
+                    Console.WriteLine("Døren er låst. Du kan ikke åbne den (Door Simulator)");
+                    return;
+                }
+                Open = true;
+                // Console.WriteLine("Døren er åben.");
+                DoorEvent?.Invoke(this, new DoorEventArgs() { IsDoorOpen = true });
+            }
+            
         }
 
         public void OnDoorClose()
         {
+            if (!Open)
+            {
+                Console.WriteLine("Man kan ikke lukke en lukket dør(Door Simulator)");
+                return;
+            }
             Open = false;
-            DoorEvent?.Invoke(this,new DoorEventArgs(){IsDoorOpen = this.Open});
+            DoorEvent?.Invoke(this,new DoorEventArgs(){IsDoorOpen = false});
             
         }
     }
