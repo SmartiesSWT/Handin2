@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace Handin2
 {
-    public class DisplaySimulator : IDisplay
+    class ChargeControl
     {
-        public void print(string tekst)
-        {
-            Console.WriteLine(tekst);
-        }
     }
 }

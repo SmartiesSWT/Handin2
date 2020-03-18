@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Handin2;
-using Handin2.RfidReader;
-using UsbSimulator;
 
-namespace Ladeskab
+
+namespace Handin2
 {
     public class StationControl
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Handin2.RfidReader
+namespace Handin2
 {
     public class RfidReaderSimulator : IRfidReader
     {

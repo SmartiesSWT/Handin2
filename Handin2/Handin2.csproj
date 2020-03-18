@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChargeControl.cs" />
     <Compile Include="Display\DisplaySimulator.cs" />
     <Compile Include="Door\DoorSimulator.cs" />
     <Compile Include="Display\IDisplay.cs" />
