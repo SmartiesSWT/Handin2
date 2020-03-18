@@ -10,7 +10,7 @@ using Assert = NUnit.Framework.Assert;
 
 namespace Handin2.Test.Unit
 {
-   // [TestClass]
+    [TestClass]
     public class TestDoorSimulator
     {
 
@@ -82,5 +82,52 @@ namespace Handin2.Test.Unit
             
             Assert.That(_uut.Open, Is.EqualTo(false));
         }
+
+        [Test]
+        public void TestingClosingAOpenDoor()
+        {
+            _uut.Open = true;
+            
+
+            _uut.OnDoorClose();
+            Assert.That(_recievedDoorEventArgs, Is.Not.Null);
+        }
+
+        [Test]
+        public void TestingClosingAOpenDoor_GotNewValue()
+        {
+            _uut.Open = true;
+
+
+            _uut.OnDoorClose();
+            Assert.That(_recievedDoorEventArgs.IsDoorOpen, Is.EqualTo(false));
+        }
+
+        [Test]
+        public void TestingClosingAClosedDoor()
+        {
+            _uut.Open = false;
+
+
+            _uut.OnDoorClose();
+            Assert.That(_recievedDoorEventArgs, Is.Null);
+        }
+
+        [Test]
+        public void TestingLockDoor()
+        {
+            _uut.LockDoor();
+
+            Assert.That(_uut.Islocked, Is.EqualTo(true) );
+        }
+
+        [Test]
+        public void TestingUnLockDoor()
+        {
+            _uut.UnlockDoor();
+
+            Assert.That(_uut.Islocked, Is.EqualTo(false));
+        }
+
     }
 }
