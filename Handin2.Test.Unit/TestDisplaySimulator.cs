@@ -22,7 +22,7 @@ namespace Handin2.Test.Unit
         }
 
         [Test]
-        public void TestOpeningAClosedDoor()
+        public void TestOfPrintsFunction()
         {
             _uut.print("hej");
             Assert.That(_uut.test, Is.EqualTo(1));
