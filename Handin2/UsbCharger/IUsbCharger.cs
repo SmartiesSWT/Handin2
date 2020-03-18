@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UsbSimulator
+namespace Handin2
 {
     public class CurrentEventArgs : EventArgs
     {

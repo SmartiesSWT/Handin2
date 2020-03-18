@@ -1,12 +1,9 @@
-﻿using Handin2.RfidReader;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Handin2.Display;
-using Ladeskab;
-using UsbSimulator;
+using Handin2;
 
 namespace Handin2
 {

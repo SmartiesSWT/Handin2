@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Handin2.RfidReader;
 using Handin2;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
