@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Handin2.RfidReader;
+using Handin2;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;
@@ -13,6 +14,7 @@ namespace Handin2.Test.Unit
     [TestClass]
     class TestRfidReaderSimulator
     {
+       
         private RfidReaderSimulator _uut;
         private RfidEventArgs _recievedRfidEventArgs;
 

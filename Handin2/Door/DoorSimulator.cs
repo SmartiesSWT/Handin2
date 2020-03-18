@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Handin2
 {
-    class DoorSimulator : IDoor
+    public class DoorSimulator : IDoor
     {
         public event EventHandler<DoorEventArgs> DoorEvent;
-        public bool Open { get; private set; }
+        public bool Open { get; set; }
         public bool Islocked { get; set; }
 
         public DoorSimulator()
