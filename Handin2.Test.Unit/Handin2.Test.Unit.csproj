@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Handin2TestUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDisplaySimulator.cs" />
     <Compile Include="TestRfidReaderSimulator.cs" />
     <Compile Include="TestStationControl.cs" />
     <Compile Include="TestUsbChargerSimulator.cs" />

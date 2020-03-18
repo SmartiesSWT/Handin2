@@ -8,8 +8,10 @@ namespace Handin2
 {
     public class DisplaySimulator : IDisplay
     {
+        public int test = 0;
         public void print(string tekst)
         {
+            test = 1;
             Console.WriteLine(tekst);
         }
     }
