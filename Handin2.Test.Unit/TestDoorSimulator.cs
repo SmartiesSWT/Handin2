@@ -8,16 +8,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Handin2.Test.Unit
-{
-    [TestClass]
-    public class TestDoorSimulator
-    {
+//namespace Handin2.Test.Unit
+//{
+//    [TestClass]
+//    public class TestDoorSimulator
+//    {
 
-        private DoorSimulator _uut;
-        [TestMethod]
-        public void TestMethod1()
-        {
-        }
-    }
-}
+//        private DoorSimulator _uut;
+//        [TestMethod]
+//        public void TestMethod1()
+//        {
+//        }
+//    }
+//}
