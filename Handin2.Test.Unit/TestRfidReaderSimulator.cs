@@ -11,7 +11,7 @@ using Assert = NUnit.Framework.Assert;
 namespace Handin2.Test.Unit
 {   
     [TestClass]
-    class TestRfidReaderSimulator
+    public class TestRfidReaderSimulator
     {
        
         private RfidReaderSimulator _uut;
