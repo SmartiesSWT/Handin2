@@ -23,6 +23,8 @@ namespace Handin2
         private System.Timers.Timer _timer;
         private int _ticksSinceStart;
 
+        public int test = 1;
+
         public UsbChargerSimulator()
         {
             CurrentValue = 0.0;
@@ -65,6 +67,7 @@ namespace Handin2
             Connected = connected;
             if (Connected)
             {
+                test = 1;
                 Console.WriteLine("Telefon er tilsluttet.");
             }
             else

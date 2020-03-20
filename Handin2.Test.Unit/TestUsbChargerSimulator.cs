@@ -234,6 +234,12 @@ namespace UsbSimulator.Test
             Assert.That(lastValue, Is.EqualTo(1000.0));
         }
 
+        [Test]
+        public void TestOfsimulationConnected()
+        {
+            _uut.SimulateConnected(true);
+            Assert.That(_uut.test, Is.EqualTo(1));
+        }
 
 
     }
