@@ -69,6 +69,7 @@
     <Compile Include="TestStationControl.cs" />
     <Compile Include="TestUsbChargerSimulator.cs" />
     <Compile Include="TestDoorSimulator.cs" />
+    <Compile Include="TestChargeControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

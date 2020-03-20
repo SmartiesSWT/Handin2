@@ -39,7 +39,7 @@ namespace Handin2
         private void CurrentEvent(Object sender, CurrentEventArgs e)
         {
            
-            if (0 < e.Current && e.Current <= 5 && (0 < oldcurrent && oldcurrent <= 5))
+            if (0 < e.Current && e.Current <= 5 && !(0 < oldcurrent && oldcurrent <= 5))
             {
                 _display.print("Charge completed");
                 oldcurrent = e.Current;
@@ -49,7 +49,7 @@ namespace Handin2
                 _display.print("Ladning igang");
                 oldcurrent = e.Current;
             }
-            else if (e.Current > 500 && !(oldcurrent > e.Current))
+            else if (e.Current > 500 && !(oldcurrent > 500))
             {
                 _display.print("Fejl i ladning. frakobl straks");
                 oldcurrent = e.Current;

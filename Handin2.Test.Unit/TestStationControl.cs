@@ -17,7 +17,7 @@ namespace Handin2.Test.Unit
         private IDoor _door;
         private IDisplay _display;
         private IRfidReader _rfid;
-        private IUsbCharger _usb;
+        private IChargeControl _usb;
 
         [SetUp]
         public void Setup()
@@ -26,7 +26,7 @@ namespace Handin2.Test.Unit
             _door = Substitute.For<IDoor>();
             _display = Substitute.For<IDisplay>();
             _rfid = Substitute.For<IRfidReader>();
-            _usb = Substitute.For<IUsbCharger>();
+            _usb = Substitute.For<IChargeControl>();
         }
 
 
