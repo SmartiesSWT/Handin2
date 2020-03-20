@@ -120,6 +120,7 @@ namespace Handin2
                     DoorClosed(e);
                     break;
                 case LadeskabState.Locked:
+                    _display.print("skab låst");
                     break;
                 
             }

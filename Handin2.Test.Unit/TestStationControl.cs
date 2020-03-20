@@ -196,9 +196,6 @@ namespace Handin2.Test.Unit
         public void Test_DoorClosed_IsDoorOpen_true()
         {
             //Act 
-            // Vi vil gerne teste at når der
-            // Åbnes for døren, uden at være tilsluttet en telefon 
-            // vil der printes fra display
 
             //Simulerer at ingen telefon er tilsluttet
             _chargeControl.IsConnected().Returns(true);
@@ -211,6 +208,28 @@ namespace Handin2.Test.Unit
                 Raise.EventWith(new DoorEventArgs() { IsDoorOpen = true });
 
             _display.Received().print("Der skete en fejl i lukning af døren.");
+        }
+
+        [Test]
+        public void Test_StateLocked_DoorEvent()
+        {
+            //Act 
+            // Vi vil gerne teste at når der
+            // Åbnes for døren, uden at være tilsluttet en telefon 
+            // vil der printes fra display
+
+            //Simulerer at ingen telefon er tilsluttet
+            _chargeControl.IsConnected().Returns(true);
+
+            //Raiser et doorevent så døren åbnes
+            _rfid.RfidEvent +=
+                Raise.EventWith(new RfidEventArgs() { RfidTag = 1234 });
+
+            _door.DoorEvent +=
+                Raise.EventWith(new DoorEventArgs() { IsDoorOpen = true });
+
+
+            _display.Received().print("skab låst");
         }
 
     }
