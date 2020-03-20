@@ -61,13 +61,15 @@ namespace Handin2
                             writer.WriteLine(DateTime.Now + ": Skab låst med RFID: {0}", id);
                         }
 
-                        Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
+                        _display.print("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
+                       
                         
                         _state = LadeskabState.Locked;
                     }
                     else
                     {
-                        Console.WriteLine("Din telefon er ikke ordentlig tilsluttet. Prøv igen.");
+                        _display.print("Din telefon er ikke ordentlig tilsluttet. Prøv igen.");
+                        
                     }
 
                     break;
@@ -88,14 +90,16 @@ namespace Handin2
                             writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", id);
                         }
 
-                        Console.WriteLine("Åben lågen og tag din telefon.");
+                        _display.print("Åben lågen og tag din telefon.");
+                        
                         
                         _state = LadeskabState.Available;
 
                     }
                     else
                     {
-                        Console.WriteLine("Forkert RFID tag.");
+                        _display.print("Forkert RFID tag.");
+                        
                     }
 
                     break;
