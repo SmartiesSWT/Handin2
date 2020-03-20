@@ -135,5 +135,83 @@ namespace Handin2.Test.Unit
             _display.DidNotReceive().print(Arg.Any<string>());
         }
 
+        [Test]
+        public void Test_DoorOpen_Connected_takephone()
+        {
+            //Act 
+            // Vi vil gerne teste at når der
+            // Åbnes for døren, uden at være tilsluttet en telefon 
+            // vil der printes fra display
+
+            //Simulerer at ingen telefon er tilsluttet
+            _chargeControl.IsConnected().Returns(true);
+
+            //Raiser et doorevent så døren åbnes
+            _door.DoorEvent +=
+                Raise.EventWith(new DoorEventArgs() { IsDoorOpen = true });
+
+            _display.Received().print("Tag din telefon");
+        }
+
+        [Test]
+        public void Test_DoorOpen_Connected_takephone_whendoorClose()
+        {
+            //Act 
+            // Vi vil gerne teste at når der
+            // Åbnes for døren, uden at være tilsluttet en telefon 
+            // vil der printes fra display
+
+            //Simulerer at ingen telefon er tilsluttet
+            _chargeControl.IsConnected().Returns(true);
+
+            //Raiser et doorevent så døren åbnes
+            _door.DoorEvent +=
+                Raise.EventWith(new DoorEventArgs() { IsDoorOpen = false });
+
+            _display.Received().print("Tag din telefon");
+        }
+
+        [Test]
+        public void Test_DoorClosed_IsDoorOpen_false()
+        {
+            //Act 
+            // Vi vil gerne teste at når der
+            // Åbnes for døren, uden at være tilsluttet en telefon 
+            // vil der printes fra display
+
+            //Simulerer at ingen telefon er tilsluttet
+            _chargeControl.IsConnected().Returns(true);
+
+            //Raiser et doorevent så døren åbnes
+            _door.DoorEvent +=
+                Raise.EventWith(new DoorEventArgs() { IsDoorOpen = true });
+
+            _door.DoorEvent +=
+                Raise.EventWith(new DoorEventArgs() { IsDoorOpen = false});
+
+            _display.Received().print("Døren er lukket, men ikke låst: Indlaes RFID ved at trykke R os så indtast nummer");
+        }
+
+        [Test]
+        public void Test_DoorClosed_IsDoorOpen_true()
+        {
+            //Act 
+            // Vi vil gerne teste at når der
+            // Åbnes for døren, uden at være tilsluttet en telefon 
+            // vil der printes fra display
+
+            //Simulerer at ingen telefon er tilsluttet
+            _chargeControl.IsConnected().Returns(true);
+
+            //Raiser et doorevent så døren åbnes
+            _door.DoorEvent +=
+                Raise.EventWith(new DoorEventArgs() { IsDoorOpen = true });
+
+            _door.DoorEvent +=
+                Raise.EventWith(new DoorEventArgs() { IsDoorOpen = true });
+
+            _display.Received().print("Der skete en fejl i lukning af døren.");
+        }
+
     }
 }
