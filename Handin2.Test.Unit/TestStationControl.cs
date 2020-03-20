@@ -17,17 +17,81 @@ namespace Handin2.Test.Unit
         private IDoor _door;
         private IDisplay _display;
         private IRfidReader _rfid;
-        private IChargeControl _usb;
+        private IChargeControl _chargeControl;
 
         [SetUp]
         public void Setup()
         {
-            _uut = new StationControl(_door, _usb, _display, _rfid);
+            
             _door = Substitute.For<IDoor>();
             _display = Substitute.For<IDisplay>();
             _rfid = Substitute.For<IRfidReader>();
-            _usb = Substitute.For<IChargeControl>();
+            _chargeControl = Substitute.For<IChargeControl>();
+
+            _uut = new StationControl(_door, _chargeControl, _display, _rfid);
+
         }
+
+        [Test]
+        public void TestRfidDetected_Available_testDoorlocking()
+        {
+            _chargeControl.IsConnected().Returns(true);
+
+            _rfid.RfidEvent +=
+                Raise.EventWith(new RfidEventArgs() {RfidTag = 1234});
+
+            _door.Received().LockDoor();
+        }
+
+        [Test]
+        public void TestRfidDetected_Available_testStartCharging()
+        {
+            _chargeControl.IsConnected().Returns(true);
+
+            _rfid.RfidEvent +=
+                Raise.EventWith(new RfidEventArgs() { RfidTag = 1234 });
+
+            _chargeControl.Received().StartCharge();
+        }
+
+        [Test]
+        public void TestRfidDetected_StateLocked_testStopCharging()
+        {
+            //Act
+            _chargeControl.IsConnected().Returns(true);
+
+            _rfid.RfidEvent +=
+                Raise.EventWith(new RfidEventArgs() { RfidTag = 1234 });
+            _rfid.RfidEvent +=
+                Raise.EventWith(new RfidEventArgs() { RfidTag = 1234 });
+
+            //Assert
+            _chargeControl.Received().StopCharge();
+        }
+
+
+
+
+
+        [Test]
+        public void TestRfidDetected_DoorOpen_NoConnect_ConnectPhone()
+        {
+            //Act 
+            // Vi vil gerne teste at når der
+            // Åbnes for døren, uden at være tilsluttet en telefon 
+            // vil der printes fra display
+
+            //Simulerer at ingen telefon er tilsluttet
+            _chargeControl.IsConnected().Returns(false);
+
+            //Raiser et doorevent så døren åbnes
+            _door.DoorEvent += 
+                Raise.EventWith(new DoorEventArgs() {IsDoorOpen = true});
+            
+            _display.Received().print("Tilslut din telefon.");
+        }
+
+
 
 
 

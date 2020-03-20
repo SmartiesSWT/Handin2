@@ -47,34 +47,41 @@ namespace Handin2.Test.Unit
             Assert.That(_uut.IsConnected, Is.EqualTo(boolsk));
         }
 
-
-        [TestCase(-1)]
-        [TestCase(0)]
-        [TestCase(3)]
-        [TestCase(100)]
-        [TestCase(501)]
-        public void TestCurrentEvent_WithDifCurrents(double current)
+        [Test]
+        public void TestCurrentEvent_WithLowCurrent()
         {
             _usbCharger.CurrentValueEvent +=
-                Raise.EventWith(new CurrentEventArgs() {Current = current});
+                Raise.EventWith(new CurrentEventArgs() { Current = 1 });
 
-            if (0 < current && current <= 5)
-            {
-                _display.Received().print("Charge completed");
-            }else if (5 < current && current < 500)
-            {
-                _display.Received().print("Ladning igang");
-            }
-            else if (current > 500)
-            {
-                _display.Received().print("Fejl i ladning. frakobl straks");
-            }
-            else
-            {
-                _display.DidNotReceive().print(Arg.Any<string>());
-            }
-           
-            
+            _display.Received().print("Charge completed");
         }
+
+        [Test]
+        public void TestCurrentEvent_WithMediumCurrent()
+        {
+            _usbCharger.CurrentValueEvent +=
+                Raise.EventWith(new CurrentEventArgs() { Current = 100 });
+
+            _display.Received().print("Ladning igang");
+        }
+
+        [Test]
+        public void TestCurrentEvent_WithHighCurrent()
+        {
+            _usbCharger.CurrentValueEvent +=
+                Raise.EventWith(new CurrentEventArgs() { Current = 550 });
+
+            _display.Received().print("Fejl i ladning. frakobl straks");
+        }
+
+        [Test]
+        public void TestCurrentEvent_WithCurrentOutofRange()
+        {
+            _usbCharger.CurrentValueEvent +=
+                Raise.EventWith(new CurrentEventArgs() { Current = -1 });
+
+            _display.DidNotReceive().print(Arg.Any<string>());
+        }
+
     }
 }
