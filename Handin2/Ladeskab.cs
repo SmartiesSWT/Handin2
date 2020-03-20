@@ -14,10 +14,11 @@ namespace Handin2
             // Assemble your system here from all the classes
             DoorSimulator door = new DoorSimulator();
             RfidReaderSimulator rfidReader = new RfidReaderSimulator();
+            
             UsbChargerSimulator charger = new UsbChargerSimulator();
             DisplaySimulator display = new DisplaySimulator();
-
-            StationControl stationControl = new StationControl(door,charger,display, rfidReader);
+            ChargeControl chargeControl = new ChargeControl(charger, display);
+            StationControl stationControl = new StationControl(door,chargeControl,display, rfidReader);
 
             bool finish = false;
             do

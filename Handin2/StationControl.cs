@@ -22,7 +22,7 @@ namespace Handin2
         // Her mangler flere member variable
         private LadeskabState _state;
         private IRfidReader _rfidReader;
-        private IUsbCharger _charger;
+        private IChargeControl _charger;
         private IDoor _door;
         private IDisplay _display;
         private int _oldId;
@@ -30,7 +30,7 @@ namespace Handin2
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
         // Her mangler constructor
-        public StationControl(IDoor door, IUsbCharger charger, IDisplay display, IRfidReader rfidReader)
+        public StationControl(IDoor door, IChargeControl charger, IDisplay display, IRfidReader rfidReader)
         {
             _charger = charger;
             _display = display;
@@ -51,7 +51,7 @@ namespace Handin2
             {
                 case LadeskabState.Available:
                     // Check for ladeforbindelse
-                    if (_charger.Connected)
+                    if (_charger.IsConnected())
                     {
                         _door.LockDoor();
                         _charger.StartCharge();
@@ -116,7 +116,6 @@ namespace Handin2
                     DoorClosed(e);
                     break;
                 case LadeskabState.Locked:
-                    _display.print("Hov hov, døren er låst du");
                     break;
                 
             }
@@ -128,8 +127,18 @@ namespace Handin2
             
             if (e.IsDoorOpen)
             {
-                _display.print("Tilslut din telefon.");
-                _state = LadeskabState.DoorOpen;
+                if (_charger.IsConnected())
+                {
+                    _display.print("Tag din telefon");
+                    _state = LadeskabState.DoorOpen;
+
+                }
+                else
+                {
+                    _display.print("Tilslut din telefon.");
+                    _state = LadeskabState.DoorOpen;
+                }
+                
             }
             else
             {
