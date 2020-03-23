@@ -1,4 +1,4 @@
-﻿:Uusing System;
+﻿using System;
 
 namespace Handin2
 {
